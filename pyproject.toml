@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "edit-assembly-after-gb-check"
+version = "0.1.0"
+description = ""
+authors = ["sharvadim07 <sharvadim07@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "edit_assembly_after_gb_check"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+biopython = "^1.81"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

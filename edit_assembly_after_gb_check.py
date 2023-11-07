@@ -1,7 +1,7 @@
-import logging
 import argparse
 from Bio import SeqIO
 from Bio.Seq import Seq
+import re
 
 
 parser = argparse.ArgumentParser(description='Program for editing assembly after genbank contamination check.')
@@ -50,7 +50,6 @@ def read_genbank_report(report_file_name):
 
 
 def split_by_list_seq(in_seq, separator_seq_list):    
-    import re
     return re.split(r'(?:' + '|'.join(separator_seq_list) + r')', in_seq)
 
 def edit_assembly(fasta_file_name, exlude_seq_list, trim_section_dict, duplicate_list):
@@ -64,9 +63,9 @@ def edit_assembly(fasta_file_name, exlude_seq_list, trim_section_dict, duplicate
             for span in trim_section_dict[seq]:
                 start_pos = int(span.split('..')[0]) - 1
                 end_pos = int(span.split('..')[1])
-                cont_seq_dict[seq + '_' + span] = assembly_dict[seq].seq._data[start_pos:end_pos]
+                cont_seq_dict[seq + '_' + span] = str(assembly_dict[seq].seq._data[start_pos:end_pos].decode())
             #TODO: check this
-            new_seq_list = split_by_list_seq(assembly_dict[seq].seq._data, [cont_seq_dict[cont_seq] for cont_seq in cont_seq_dict])
+            new_seq_list = split_by_list_seq(str(assembly_dict[seq].seq._data.decode()), [cont_seq_dict[cont_seq] for cont_seq in cont_seq_dict])
             for i, new_seq in enumerate(new_seq_list):
                 if new_seq != '':
                     name = seq + '_trimmed_' + str(i)
