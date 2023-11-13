@@ -15,14 +15,14 @@ parser.add_argument(
     "--check_results",
     type=str,
     help="File with genbank checking report.",
-    required=True,
+    required=False,
 )
 parser.add_argument(
     "-f",
     "--check_results_fcs",
     type=str,
     help="File with FCS checking report.",
-    required=True,
+    required=False,
 )
 
 args = parser.parse_args()
