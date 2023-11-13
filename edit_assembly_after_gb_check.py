@@ -77,6 +77,8 @@ def read_fcs_report(report_file_name):
         trim_section_dict = {}
         duplicate_list = []
         for report_line in report_file:
+            if report_line.startswith("#"):
+                continue
             (
                 seq_id,
                 start_pos,
