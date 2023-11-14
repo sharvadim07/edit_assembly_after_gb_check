@@ -88,7 +88,7 @@ def read_fcs_report(report_file_name):
                 div,
                 agg_cont_cov,
                 top_tax_name,
-            ) = report_line.strip().split()
+            ) = report_line.strip().split("\t")
             if action == "EXCLUDE":
                 exlude_seq_list.append(seq_id)
             elif action == "TRIM":
